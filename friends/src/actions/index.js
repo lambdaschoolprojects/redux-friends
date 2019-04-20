@@ -36,7 +36,9 @@ export const getFriends = _ => dispatch => {
   dispatch({ type: FETCHING_FRIENDS });
 
   axios
-    .get(FRIENDS_API)
+    .get(FRIENDS_API, {
+      headers: { Authorization: localStorage.getItem("token") }
+    })
     .then(res =>
       dispatch({
         type: FRIENDS_FETCHED,

@@ -9,6 +9,8 @@ import {
 
 const initialState = {
   friends: [],
+  isGettingData: false,
+  fetchError: "",
   isLoggingIn: false,
   loginError: ""
 };
@@ -31,5 +33,18 @@ export const loginReducer = (state = initialState, action) => {
 };
 
 export const friendsReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case FETCHING_FRIENDS:
+      return { ...state, isGettingData: true };
+      break;
+    case FRIENDS_FETCHED:
+      return { ...state, friends: action.payload, isGettingData: false };
+      break;
+    case FRIENDS_FETCH_FAILED:
+      return { ...state, isGettingData: false, fetchError: action.payload };
+      break;
+    default:
+      return state;
+  }
   return state;
 };
