@@ -10,10 +10,12 @@ class Friends extends Component {
   }
 
   render() {
-    const { friends } = this.props;
+    const { friends, error, isGettingData } = this.props;
 
     return (
       <div>
+        {isGettingData && <h2>Loading friends</h2>}
+        {error && <h2>Something went wrong</h2>}
         {friends &&
           friends.map(friend => <Friend data={friend} key={friend.id} />)}
       </div>
@@ -22,9 +24,9 @@ class Friends extends Component {
 }
 
 const mapStateToPros = ({
-  friendsReducer: { friends, error, isGettingdata }
+  friendsReducer: { friends, error, isGettingData }
 }) => {
-  return { friends, error, isGettingdata };
+  return { friends, error, isGettingData };
 };
 
 export default connect(
