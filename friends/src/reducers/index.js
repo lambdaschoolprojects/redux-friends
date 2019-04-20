@@ -4,7 +4,10 @@ import {
   LOGIN_SUCCESS,
   FRIENDS_FETCH_FAILED,
   FRIENDS_FETCHED,
-  FETCHING_FRIENDS
+  FETCHING_FRIENDS,
+  ADD_FAILED,
+  ADDING_FRIEND,
+  FRIEND_ADDED
 } from "../actions";
 
 const initialState = {
@@ -35,12 +38,15 @@ export const loginReducer = (state = initialState, action) => {
 export const friendsReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCHING_FRIENDS:
+    case ADDING_FRIEND:
       return { ...state, isGettingData: true };
       break;
+    case FRIEND_ADDED:
     case FRIENDS_FETCHED:
       return { ...state, friends: action.payload, isGettingData: false };
       break;
     case FRIENDS_FETCH_FAILED:
+    case ADD_FAILED:
       return { ...state, isGettingData: false, fetchError: action.payload };
       break;
     default:

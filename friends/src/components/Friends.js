@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import { getFriends } from "../actions";
 import Friend from "./Friend";
+import FriendForm from "./FriendForm";
 
 class Friends extends Component {
   componentDidMount() {
@@ -14,6 +15,7 @@ class Friends extends Component {
 
     return (
       <div>
+        <FriendForm />
         {isGettingData && <h2>Loading friends</h2>}
         {error && <h2>Something went wrong</h2>}
         {friends &&
