@@ -9,6 +9,9 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const FETCHING_FRIENDS = "FETCHING_FRIENDS";
 export const FRIENDS_FETCHED = "FRIENDS_FETCHED";
 export const FRIENDS_FETCH_FAILED = "FRIENDS_FETCH_FAILED";
+export const ADDING_FRIEND = "ADDING_FRIEND";
+export const FRIEND_ADDED = "FRIEND_ADDED";
+export const ADD_FAILED = "ADD_FAILED";
 
 const LOCAL_API = "http://localhost:5000/api/";
 const LOGIN_API = LOCAL_API + "login";
@@ -51,4 +54,21 @@ export const getFriends = _ => dispatch => {
         payload: error
       })
     );
+};
+
+export const addFriends = friend => dispatch => {
+  dispatch({ type: ADDING_FRIEND });
+
+  axios
+    .post(FRIENDS_API, friend, {
+      headers: { Authorization: localStorage.getItem("token") }
+    })
+    .then(res => ({
+      type: FRIEND_ADDED,
+      payload: res.data
+    }))
+    .catch(error => ({
+      type: ADD_FAILED,
+      payload: error
+    }));
 };
