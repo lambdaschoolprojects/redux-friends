@@ -1,6 +1,5 @@
 import React from "react";
-import { Route, Redirect, withRouter } from "react-router-dom";
-import { connect } from "react-redux";
+import { Route, Redirect } from "react-router-dom";
 
 // Requires:
 // 1. It has the API as <Route />
@@ -9,19 +8,19 @@ import { connect } from "react-redux";
 // "component" prop if not, it redirects to /login.
 
 const PrivateRoute = ({ component: Component, ...therest }) => {
-    return (
-        <Route
-            {...therest}
-            render={() => {
-                if (localStorage.getItem("token")) {
-                    return <Component />;
-                } else {
-                    console.log("redirecting!!!!");
-                    return <Redirect to="/login" />;
-                }
-            }}
-        />
-    );
+  return (
+    <Route
+      {...therest}
+      render={() => {
+        if (localStorage.getItem("token")) {
+          return <Component />;
+        } else {
+          console.log("redirecting!!!!");
+          return <Redirect to="/login" />;
+        }
+      }}
+    />
+  );
 };
 
 export default PrivateRoute;
