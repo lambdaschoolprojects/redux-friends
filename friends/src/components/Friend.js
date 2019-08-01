@@ -6,6 +6,7 @@ const Friend = ({ data: { name, age, email } }) => {
       <h2>Name: {name} </h2>
       <h3>Age: {age} </h3>
       <h3>Email: {email} </h3>
+      <hr />
     </>
   );
 };
